@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { Component } from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import React from 'react'
 
 const InfoRow = () => {
   return (
     <View style={styles.container}>
         <View style={styles.left}>
-            <Text>InfoRow 1</Text>
-
+            <Image
+                source={require("../assets/favicon.png")}
+                style={styles.avatar}
+                accessibilityRole="image"
+                accessibilityLabel="Ảnh đại diện sinh viên Nguyễn Minh Anh"
+            />
         </View>
 
         <View style={styles.right}>
@@ -31,10 +35,19 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: '#f2f2f2',
+        alignItems: 'center',
     },
     left: {
         width: '35%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 10,
+    },
+    avatar: {
+        width: 64,
+        height: 64,
+        borderRadius: 32,
+        resizeMode: 'cover',
     },
     right: {
         width: '65%',

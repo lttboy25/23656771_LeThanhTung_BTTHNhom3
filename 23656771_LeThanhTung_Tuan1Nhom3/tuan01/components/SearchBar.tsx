@@ -1,20 +1,28 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { Component } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
 
-export default class SearchBar extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput placeholder="Tìm kiếm thông tin..." style={styles.searchInput} />
-      </View>
-    )
-  }
+export default function SearchBar() {
+  const [keyword, setKeyword] = useState('')
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Tìm kiếm thông tin..."
+        placeholderTextColor="#e0e0e0"
+        style={styles.searchInput}
+        value={keyword}
+        onChangeText={setKeyword}
+        accessibilityRole="search"
+        accessibilityLabel="Ô tìm kiếm thông tin sinh viên"
+        accessibilityHint="Nhập từ khóa để tìm kiếm"
+      />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: '#f2f2f2',
         alignItems: 'center',
     },
     searchInput: {
@@ -25,6 +33,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         backgroundColor: 'gray',
+        fontFamily: 'Times New Roman',
 
     }
 })

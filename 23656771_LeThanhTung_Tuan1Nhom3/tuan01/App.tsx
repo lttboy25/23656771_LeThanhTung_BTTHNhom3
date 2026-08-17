@@ -8,7 +8,7 @@ import ActionButton from './components/ActionButton';
 
 export default function App() {
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Headers />
       <InfoRow />
 
@@ -16,8 +16,25 @@ export default function App() {
 
       <ContactInfoRow />
 
-      <ActionButton />
+      <ActionButton
+        title="LƯU HỒ SƠ"
+        onPress={() => {}}
+        accessibilityLabel="Lưu hồ sơ sinh viên"
+        accessibilityHint="Nhấn để lưu thông tin hồ sơ hiện tại"
+      />
+
+      <ActionButton
+        title="XÓA HỒ SƠ"
+        disabled
+        accessibilityLabel="Xóa hồ sơ sinh viên"
+        accessibilityHint="Chức năng hiện đang bị vô hiệu hóa"
+      />
     </ScrollView>
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white"
+  }
+});
