@@ -1,0 +1,50 @@
+import React, { createContext, useContext, useState } from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+const ThemeContext = createContext(null);
+
+function HomeScreen() {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
+    return (
+        <View
+            style={[
+                styles.container,
+                { backgroundColor: isDarkMode ? '#222222' : '#ffffff' },
+            ]}
+        >
+            <Text style={{ color: isDarkMode ? '#ffffff' : '#222222' }}>
+                {isDarkMode ? 'Chế độ tối' : 'Chế độ sáng'}
+            </Text>
+
+
+            <Button
+                title="Đổi giao diện"
+                onPress={toggleTheme}
+            />
+        </View>
+    )
+}
+
+export default function DarkLightMode() {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleTheme = () => {
+        setIsDarkMode(prev => !prev);
+    }
+
+    return (
+        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+            <HomeScreen />
+        </ThemeContext.Provider>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        gap: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
