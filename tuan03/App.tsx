@@ -7,6 +7,9 @@ import ConnectionStatusMonitor from './components/ConnectionStatusMonitor';
 import DarkLightMode from './components/DarkLightMode';
 import ShareInfomation from './components/ShareInfomation';
 import Cart from './components/Cart';
+import LoginFormMana from './components/LoginFormMana';
+import MemoAndCallBack from './components/MemoAndCallBack';
+import FindAndSum from './components/FindAndSum';
 
 export default function App() {
   
@@ -24,7 +27,13 @@ export default function App() {
 
       {/* <ShareInfomation/> */}
 
-      <Cart />
+      {/* <Cart /> */}
+
+      {/* <LoginFormMana /> */}
+
+      {/* <MemoAndCallBack /> */}
+
+      <FindAndSum />
     </View>
   );
 }
