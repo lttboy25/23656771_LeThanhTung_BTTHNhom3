@@ -1,3 +1,5 @@
+const BASE_URL = 'https://6aba13785b549d818d61e2cc.mockapi.io/api/v1/books';
+
 export type Review = {
   id: string;
   userName: string;
@@ -5,36 +7,51 @@ export type Review = {
   comment: string;
 };
 
-// Dữ liệu mẫu theo bookId (mất khi tắt app)
-const db: Record<string, Review[]> = {
-  '1': [
-    { id: 'r1', userName: 'Minh', rating: 5, comment: 'Sách rất hay, nội dung dễ hiểu.' },
-    { id: 'r2', userName: 'Lan', rating: 4, comment: 'Giao hàng nhanh, sách mới.' },
-    { id: 'r3', userName: 'Huy', rating: 3, comment: 'Tạm ổn, hơi dài dòng.' },
-  ],
+type Book = {
+  id: string;
+  title: string;
+  author: string;
+  years: number;
+  genre: string;
+  reviews: Review[];
 };
-
-const delay = (ms = 500) => new Promise(r => setTimeout(r, ms));
 
 export const calcAverage = (reviews: Review[]) =>
   reviews.length
     ? Math.round((reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length) * 10) / 10
     : 0;
 
+const fetchBook = async (bookId: string): Promise<Book> => {
+  const res = await fetch(`${BASE_URL}/${bookId}`);
+  if (res.status === 404) throw new Error('Khong tim thay sach');
+  if (!res.ok) throw new Error('Khong ket noi duoc may chu');
+  const book: Book = await res.json();
+  return { ...book, reviews: Array.isArray(book.reviews) ? book.reviews : [] };
+};
+
 export const reviewService = {
+  // GET /books/:id  ->  book.reviews
   async getReviews(bookId: string): Promise<Review[]> {
-    await delay();
-    return [...(db[bookId] ?? [])];
+    const book = await fetchBook(bookId);
+    return book.reviews;
   },
 
-  // Giả lập POST /books/:id/reviews
+  // GET /books/:id  ->  thêm review  ->  PUT /books/:id
   async postReview(
     bookId: string,
     data: { userName: string; rating: number; comment: string }
   ): Promise<Review> {
-    await delay();
-    const review: Review = { id: `r${Date.now()}`, ...data };
-    db[bookId] = [review, ...(db[bookId] ?? [])];
+    // Lấy bản mới nhất ngay trước khi ghi, tránh đè mất review người khác vừa gửi
+    const book = await fetchBook(bookId);
+
+    const review: Review = { id: `r${bookId}-${Date.now()}`, ...data };
+    const res = await fetch(`${BASE_URL}/${bookId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...book, reviews: [review, ...book.reviews] }),
+    });
+    if (!res.ok) throw new Error('Gui danh gia that bai');
+
     return review;
   },
 };
