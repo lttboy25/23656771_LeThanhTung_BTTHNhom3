@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn An",
+      "email": "an@gmail.com",
+      "password": "$2a$10$pDEa13HpLHUEnHXVKrzu4.wsRemAMTMCSW2j96iRhx2EhjKk/v0P2"
+    },
+    {
+      "name": "Lê Thanh Tùng",
+      "email": "tung@gmail.com",
+      "password": "$2a$10$AvAeHQ701LGsSx9BH9QW4O86.rMO86vVLuOOG2S/CeGdNskvwa/hW",
+      "id": 2
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "Dế Mèn Phiêu Lưu Ký",
+      "author": "Tô Hoài",
+      "category": "Văn học",
+      "price": 45000,
+      "image": "https://picsum.photos/seed/book1/300/450",
+      "description": "Dế Mèn Phiêu Lưu Ký của Tô Hoài, một cuốn sách thuộc thể loại văn học được nhiều bạn đọc yêu thích."
+    },
+    {
+      "title": "React Native cơ bản",
+      "author": "Nguyễn Trần Quốc Việt",
+      "category": "Học tập",
+      "price": 45000,
+      "image": "https://picsum.photos/seed/book1/300/450",
+      "description": "Hướng dẫn lập trình React Native cho người mới bắt đầu",
+      "id": 2
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "bookId": 1,
+      "userId": 1,
+      "userName": "Nguyễn Văn An",
+      "rating": 2,
+      "comment": "Hơi khó đọc với mình.",
+      "createdAt": "2026-10-03T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "bookId": 1,
+      "userId": 2,
+      "userName": "Trần Thị Bình",
+      "rating": 5,
+      "comment": "Tuyệt vời, mình đọc 2 lần rồi.",
+      "createdAt": "2026-10-02T09:00:00.000Z"
+    },
+    {
+      "bookId": 1,
+      "userId": 2,
+      "rating": 5,
+      "comment": "Số 1 Vũ trụ",
+      "createdAt": "2026-10-26T07:40:43.207Z",
+      "id": 3
+    },
+    {
+      "bookId": 1,
+      "userId": 2,
+      "userName": "Lê Thanh Tùng",
+      "rating": 5,
+      "comment": "Sản phẩm quá hay",
+      "createdAt": "2026-10-26T07:42:51.648Z",
+      "id": 4
+    }
+  ]
+}
